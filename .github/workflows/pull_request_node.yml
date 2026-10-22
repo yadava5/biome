@@ -40,6 +40,15 @@ jobs:
           bins: wasm-bindgen-cli@0.2.117, wasm-opt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Add swap (fork CI only)
+        run: |
+          free -h
+          df -h /
+          sudo fallocate -l 12G /fork-ci-swapfile
+          sudo chmod 600 /fork-ci-swapfile
+          sudo mkswap /fork-ci-swapfile
+          sudo swapon /fork-ci-swapfile
+          free -h
       - name: Build main binary
         run: cargo build -p biome_cli --release
       - name: Install Node.js
