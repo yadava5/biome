@@ -26,7 +26,7 @@ env:
 
 jobs:
   changes:
-    runs-on: depot-ubuntu-24.04-arm
+    runs-on: ubuntu-24.04-arm
     permissions:
       pull-requests: read
     outputs:
@@ -261,7 +261,7 @@ jobs:
       contents: read
       pull-requests: read
     name: Bench JS / ${{ matrix.package }}
-    runs-on: depot-ubuntu-24.04-arm-16
+    runs-on: ubuntu-24.04-arm
     strategy:
       matrix:
         package:
@@ -306,7 +306,7 @@ jobs:
       contents: read
       pull-requests: read
     name: Bench Service
-    runs-on: depot-ubuntu-24.04-arm-16
+    runs-on: ubuntu-24.04-arm
     steps:
       - name: Checkout PR Branch
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -351,7 +351,7 @@ jobs:
       contents: read
       pull-requests: read
     name: Bench Plugins
-    runs-on: depot-ubuntu-24.04-arm-16
+    runs-on: ubuntu-24.04-arm
     steps:
       - name: Checkout PR Branch
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -390,7 +390,7 @@ jobs:
       contents: read
       pull-requests: read
     name: Bench Console
-    runs-on: depot-ubuntu-24.04-arm-16
+    runs-on: ubuntu-24.04-arm
     strategy:
       matrix:
         package:
@@ -404,7 +404,7 @@ jobs:
       contents: read
       pull-requests: read
     name: Bench JSON / ${{ matrix.package }}
-    runs-on: depot-ubuntu-24.04-arm-16
+    runs-on: ubuntu-24.04-arm
     strategy:
       matrix:
         package:
@@ -420,7 +420,7 @@ jobs:
       contents: read
       pull-requests: read
     name: Bench YAML
-    runs-on: depot-ubuntu-24.04-arm-16
+    runs-on: ubuntu-24.04-arm
     strategy:
       matrix:
         package:
@@ -435,7 +435,7 @@ jobs:
       contents: read
       pull-requests: read
     name: Bench CSS / ${{ matrix.package }}
-    runs-on: depot-ubuntu-24.04-arm-16
+    runs-on: ubuntu-24.04-arm
     strategy:
       matrix:
         package:
@@ -451,7 +451,7 @@ jobs:
       contents: read
       pull-requests: read
     name: Bench HTML / ${{ matrix.package }}
-    runs-on: depot-ubuntu-24.04-arm-16
+    runs-on: ubuntu-24.04-arm
     strategy:
       matrix:
         package:
@@ -467,7 +467,7 @@ jobs:
       contents: read
       pull-requests: read
     name: Bench GraphQL / ${{ matrix.package }}
-    runs-on: depot-ubuntu-24.04-arm-16
+    runs-on: ubuntu-24.04-arm
     strategy:
       matrix:
         package:
@@ -482,7 +482,7 @@ jobs:
       contents: read
       pull-requests: read
     name: Bench Markdown / ${{ matrix.package }}
-    runs-on: depot-ubuntu-24.04-arm-16
+    runs-on: ubuntu-24.04-arm
     strategy:
       matrix:
         package:
@@ -527,7 +527,7 @@ jobs:
       contents: read
       pull-requests: read
     name: Bench GritQL
-    runs-on: depot-ubuntu-24.04-arm-16
+    runs-on: ubuntu-24.04-arm
     strategy:
       matrix:
         package:
@@ -541,7 +541,7 @@ jobs:
       contents: read
       pull-requests: read
     name: Bench Tailwind
-    runs-on: depot-ubuntu-24.04-arm-16
+    runs-on: ubuntu-24.04-arm
     strategy:
       matrix:
         package:
@@ -556,7 +556,7 @@ jobs:
       contents: read
       pull-requests: read
     name: Bench Configuration
-    runs-on: depot-ubuntu-24.04-arm-16
+    runs-on: ubuntu-24.04-arm
     strategy:
       matrix:
         package:
@@ -570,7 +570,7 @@ jobs:
       contents: read
       pull-requests: read
     name: Bench Manifests
-    runs-on: depot-ubuntu-24.04-arm-16
+    runs-on: ubuntu-24.04-arm
     strategy:
       matrix:
         package:
@@ -584,7 +584,7 @@ jobs:
       contents: read
       pull-requests: read
     name: Bench Module Graph
-    runs-on: depot-ubuntu-24.04-arm-16
+    runs-on: ubuntu-24.04-arm
     strategy:
       matrix:
         package:

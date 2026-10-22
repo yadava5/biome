@@ -28,7 +28,7 @@ env:
 jobs:
   test-node-api:
     name: Test Node.js API
-    runs-on: depot-ubuntu-24.04-arm-16
+    runs-on: ubuntu-24.04-arm
     steps:
       - name: Checkout PR branch
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
