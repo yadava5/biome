@@ -442,8 +442,15 @@ impl NodeCache {
     ) -> CacheChild {
         let hash = token_hash_of(kind, text);
 
+        // The text includes the trivia, and a lexer can split the same text
+        // into token and trivia in more than one way, so a cached token only
+        // matches when its trivia pieces match too.
         let entry = self.tokens.raw_entry_mut().from_hash(hash, |token| {
-            token.0.value().kind() == kind && token.0.value().text() == text
+            let token = token.0.value();
+            token.kind() == kind
+                && token.text() == text
+                && token.leading_trivia().pieces() == leading
+                && token.trailing_trivia().pieces() == trailing
         });
 
         let token = match entry {
@@ -735,6 +742,27 @@ mod tests {
         assert!(std::ptr::eq::<GreenTokenData>(&*token, &*cached));
         assert!(cached.flags().contains(GreenElementFlags::HAS_COMMENTS));
         assert!(cached.flags().contains(GreenElementFlags::HAS_SKIPPED));
+    }
+
+    #[test]
+    fn cached_token_keeps_trivia_split() {
+        let mut cache = NodeCache::default();
+        let kind = RawSyntaxKind(0);
+        let trailing = [TriviaPiece::whitespace(1)];
+
+        let with_trivia = cache
+            .token_with_trivia(kind, " z ", &[], &trailing)
+            .into_element()
+            .into_token()
+            .unwrap();
+        let without_trivia = cache
+            .token_with_trivia(kind, " z ", &[], &[])
+            .into_element()
+            .into_token()
+            .unwrap();
+
+        assert_eq!(with_trivia.trailing_trivia().pieces(), trailing);
+        assert!(without_trivia.trailing_trivia().pieces().is_empty());
     }
 
     #[test]
