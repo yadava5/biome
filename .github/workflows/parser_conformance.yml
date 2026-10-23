@@ -31,7 +31,7 @@ env:
 
 jobs:
   changes:
-    runs-on: depot-ubuntu-24.04-arm
+    runs-on: ubuntu-24.04-arm
     permissions:
       pull-requests: read
     outputs:
@@ -121,7 +121,7 @@ jobs:
     permissions:
       pull-requests: write
     name: Parser conformance
-    runs-on: depot-ubuntu-24.04-arm-16
+    runs-on: ubuntu-24.04-arm
     env:
       COVERAGE_SUITES: ${{ needs.changes.outputs.suites }}
 
@@ -144,6 +144,14 @@ jobs:
           cache-base: main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Add swap (fork CI only)
+        run: |
+          sudo fallocate -l 12G /fork-ci-swapfile
+          sudo chmod 600 /fork-ci-swapfile
+          sudo mkswap /fork-ci-swapfile
+          sudo swapon /fork-ci-swapfile
+          free -h
 
       - name: Compile
         run: cargo build --release --locked -p xtask_coverage
